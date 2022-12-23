@@ -1,2 +1,3 @@
+pub mod icon;
 pub mod icon_button;
-mod icon;
+pub mod progress_circle;
