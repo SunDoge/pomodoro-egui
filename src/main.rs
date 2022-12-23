@@ -1,20 +1,31 @@
 #![warn(clippy::all, rust_2018_idioms)]
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
+use egui::vec2;
+use pomodoro_egui::config::app_config::AppConfig;
+
 // When compiling natively:
 #[cfg(not(target_arch = "wasm32"))]
 fn main() {
     // Log to stdout (if you run with `RUST_LOG=debug`).
+
+    use pomodoro_egui::defines;
+
     tracing_subscriber::fmt::init();
+
+    let config = AppConfig::load().unwrap_or_default();
 
     let native_options = eframe::NativeOptions {
         // decorated: false,
+        resizable: false,
+        initial_window_size: Some(vec2(360.0, 520.0)),
+        always_on_top: config.always_on_top,
         ..Default::default()
     };
     eframe::run_native(
-        "eframe template",
+        defines::APP_NAME,
         native_options,
-        Box::new(|cc| Box::new(pomodoro_egui::App::new(cc))),
+        Box::new(|cc| Box::new(pomodoro_egui::App::from_config(config, cc))),
     );
 }
 
