@@ -15,10 +15,13 @@ fn main() {
 
     let config = AppConfig::load().unwrap_or_default();
 
+    let window_size = Some(vec2(360.0, 520.0));
+
     let native_options = eframe::NativeOptions {
         // decorated: false,
         resizable: false,
-        initial_window_size: Some(vec2(360.0, 520.0)),
+        initial_window_size: window_size,
+        max_window_size: window_size,
         always_on_top: config.always_on_top,
         ..Default::default()
     };

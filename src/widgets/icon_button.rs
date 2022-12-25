@@ -1,12 +1,25 @@
-use egui::ImageButton;
-use egui_extras::RetainedImage;
+use crate::resources::icon::Icon;
+use eframe::egui::{CursorIcon, ImageButton, Response, Ui, Widget};
 
-// pub fn icon_button_ui(ui: &mut egui::Ui, icon: &RetainedImage) -> egui::Response {
-//     let button = egui::ImageButton::new(icon.texture_id(ui.ctx()), icon.size_vec2()).frame(false);
-//     let response = ui.add(button);
-//     response.on_hover_cursor(egui::CursorIcon::PointingHand)
-// }
+pub struct IconButton<'a> {
+    icon: &'a Icon,
+    with_frame: bool,
+}
 
-// pub fn icon_button(icon: &RetainedImage) -> impl egui::Widget + '_ {
-//     move |ui: &mut egui::Ui| icon_button_ui(ui, icon)
-// }
+impl<'a> IconButton<'a> {
+    pub fn new(icon: &'a Icon) -> Self {
+        Self {
+            icon,
+            with_frame: false,
+        }
+    }
+}
+
+impl<'a> Widget for IconButton<'a> {
+    fn ui(self, ui: &mut Ui) -> Response {
+        let btn = ImageButton::new(self.icon.id(), self.icon.size_f32())
+            .frame(self.with_frame);
+        let response = ui.add(btn);
+        response.on_hover_cursor(CursorIcon::PointingHand)
+    }
+}

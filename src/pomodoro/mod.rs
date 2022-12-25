@@ -11,6 +11,16 @@ pub enum Status {
     Focus,
 }
 
+impl Status {
+    pub fn to_str(&self) -> &str {
+        match self {
+            Self::Focus => "FOCUS",
+            Self::Long => "LONG BREAK",
+            Self::Short => "SHORT BREAK",
+        }
+    }
+}
+
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct PomodoroConfig {
     pub short: Duration,
@@ -120,5 +130,13 @@ impl Pomodoro {
 
     pub fn round(&self) -> u16 {
         self.round
+    }
+
+    pub fn status(&self) -> Status {
+        self.status
+    }
+
+    pub fn time_left(&self) -> Duration {
+        self.timer.time_left()
     }
 }
