@@ -13,7 +13,10 @@ fn main() {
 
     tracing_subscriber::fmt::init();
 
-    let config = AppConfig::load().unwrap_or_default();
+    let config = AppConfig::load().unwrap_or_else(|e| {
+        dbg!(e);
+        AppConfig::default()
+    });
 
     let window_size = Some(vec2(360.0, 520.0));
 

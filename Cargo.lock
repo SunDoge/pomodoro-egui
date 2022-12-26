@@ -1485,7 +1485,6 @@ dependencies = [
  "serde",
  "serde_json",
  "tiny-skia 0.8.2",
- "toml",
  "tracing-subscriber",
  "tracing-wasm",
  "usvg 0.28.0",

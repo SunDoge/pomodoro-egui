@@ -22,7 +22,6 @@ egui_extras = { version = "0.20.0", features = ["svg"] }
 color-hex = "0.2.0"
 anyhow = "1.0.68"
 dirs = "4.0.0"
-toml = "0.5.10"
 tiny-skia = "0.8.2"
 usvg = "0.28.0"
 resvg = "0.28.0"

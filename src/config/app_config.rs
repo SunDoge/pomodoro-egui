@@ -40,7 +40,8 @@ impl AppConfig {
 
     fn load_config(location: &Path) -> anyhow::Result<Self> {
         let config = std::fs::read_to_string(location)?;
-        let cfg = toml::from_str(&config)?;
+        // println!("{}", &config);
+        let cfg = serde_json::from_str(&config)?;
         Ok(cfg)
     }
 

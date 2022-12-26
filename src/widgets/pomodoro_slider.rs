@@ -4,7 +4,7 @@ use std::time::Duration;
 use super::styled_slider::StyledSlider;
 
 // Second
-const DURATION_MIN: f64 = 1.0;
+const DURATION_MIN: f64 = 60.0;
 const DURATION_MAX: f64 = (60 * 60) as f64;
 
 fn format_time(val: f64) -> String {

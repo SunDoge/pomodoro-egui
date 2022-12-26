@@ -98,6 +98,14 @@ impl AppComponent for SettingsPage {
                 ctx.config.pomodoro.long = Duration::from_secs(60 * 15);
                 ctx.config.pomodoro.rounds = 4;
             }
+            if cfg!(debug_assertions) {
+                if ui.button("Reset Debug").clicked() {
+                    ctx.config.pomodoro.focus = Duration::from_secs(3);
+                    ctx.config.pomodoro.short = Duration::from_secs(1);
+                    ctx.config.pomodoro.long = Duration::from_secs(2);
+                    ctx.config.pomodoro.rounds = 3;
+                }
+            }
         });
 
         ui.add_space(VERTICAL_PADDING);

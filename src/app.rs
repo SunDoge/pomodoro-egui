@@ -119,6 +119,8 @@ impl eframe::App for App {
     }
 
     fn on_close_event(&mut self) -> bool {
+        self.config.pomodoro = *self.pomodoro.config();
+        // dbg!(self.pomodoro.config());
         self.config.save().expect("Fail to save config");
         true
     }
