@@ -23,9 +23,9 @@ fn main() {
 
     let native_options = eframe::NativeOptions {
         // decorated: false,
-        resizable: false,
+        // resizable: false,
         initial_window_size: window_size,
-        max_window_size: window_size,
+        min_window_size: window_size,
         always_on_top: config.always_on_top,
         ..Default::default()
     };

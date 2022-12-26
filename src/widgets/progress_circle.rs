@@ -24,7 +24,7 @@ fn calc_foreground(radius: f32, center: Pos2, angle: f32) -> Vec<Pos2> {
     let single = points / 360.0;
 
     (0..points as u32)
-        .skip_while(|p| *p as f32 / single <= angle)
+        .skip_while(|p| *p as f32 / single < angle) // keep the equal point
         .map(|p| {
             let current = p as f32 / single;
             let (sin, cos) = current.to_radians().sin_cos();

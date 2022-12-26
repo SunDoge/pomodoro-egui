@@ -80,6 +80,7 @@ impl App {
             }
         }
         // println!("{:?}, {}", status, self.fullscreen);
+        // frame.set_visible(true);
         frame.set_fullscreen(self.fullscreen);
 
         self.circle.foreground = Some(Self::status_stroke(&self.config, status));
