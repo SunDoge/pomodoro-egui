@@ -81,6 +81,12 @@ impl App {
         }
         // println!("{:?}, {}", status, self.fullscreen);
         // frame.set_visible(true);
+        // frame.focus_window();
+        // frame.set_minimized(false);
+        frame.set_visible(true);
+        // frame.focus_window();
+        frame.set_always_on_top(self.fullscreen);
+        // frame.request_user_attention();
         frame.set_fullscreen(self.fullscreen);
 
         self.circle.foreground = Some(Self::status_stroke(&self.config, status));
@@ -124,5 +130,13 @@ impl eframe::App for App {
         // dbg!(self.pomodoro.config());
         self.config.save().expect("Fail to save config");
         true
+    }
+
+    fn warm_up_enabled(&self) -> bool {
+        true
+    }
+
+    fn clear_color(&self, _visuals: &egui::Visuals) -> egui::Rgba {
+        self.config.style.background.into()
     }
 }
