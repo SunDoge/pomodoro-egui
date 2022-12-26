@@ -64,11 +64,21 @@ impl App {
         }
     }
 
-    pub fn process_timer(&mut self) {
+    pub fn process_timer(&mut self, frame: &mut eframe::Frame) {
         let status = match self.pomodoro.try_next() {
             Some(v) => v,
             None => return,
         };
+
+        match status {
+            Status::Focus => {
+                self.fullscreen = false;
+            }
+            Status::Short | Status::Long => {
+                self.fullscreen = true;
+            }
+        }
+        frame.set_fullscreen(self.fullscreen);
 
         self.circle.foreground = Some(Self::status_stroke(&self.config, status));
     }
@@ -88,12 +98,12 @@ impl eframe::App for App {
     /// Called each time the UI needs repainting, which may be many times per second.
     /// Put your widgets into a `SidePanel`, `TopPanel`, `CentralPanel`, `Window` or `Area`.
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
-        self.process_timer();
+        self.process_timer(frame);
 
         egui::CentralPanel::default().show(ctx, |ui| {
-            Titlebar::with_frame(self, ui, frame);
+            // Titlebar::with_frame(self, ui, frame);
 
-            ui.add_space(15.0);
+            // ui.add_space(15.0);
 
             Topbar::add(self, ui);
 

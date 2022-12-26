@@ -43,6 +43,9 @@ impl AppComponent for Controls {
     type Context = App;
 
     fn with_frame(ctx: &mut Self::Context, ui: &mut Ui, frame: &mut eframe::Frame) {
+        // ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
+        // ui.add_space(15.0);
+
         ui.horizontal(|ui| {
             ui.add_space(15.0);
 
@@ -56,21 +59,7 @@ impl AppComponent for Controls {
             });
 
             ui.with_layout(Layout::right_to_left(egui::Align::Max), |ui| {
-                let muted = ctx.config.muted;
-                let icons = ctx.resources.icons();
-
                 ui.add_space(15.0);
-
-                // if Self::draw_mute(ui, icons, muted).clicked() {
-                //     ctx.config.muted = !ctx.config.muted;
-                // }
-
-                // ui.add_space(5.0);
-
-                // if Self::draw_skip(ui, icons).clicked() {
-                //     let status = ctx.pomodoro.next();
-                //     ctx.circle.foreground = Some(App::status_stroke(&ctx.config, status));
-                // }
 
                 if ui.toggle_value(&mut ctx.fullscreen, "Fullscreen").clicked() {
                     frame.set_fullscreen(ctx.fullscreen);
@@ -84,5 +73,6 @@ impl AppComponent for Controls {
                 }
             });
         });
+        // });
     }
 }

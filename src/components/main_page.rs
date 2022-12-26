@@ -17,6 +17,12 @@ impl AppComponent for MainPage {
         ui.add_space((ui.available_height() - diameter) / 2.0 - 75.0);
 
         Timer::add(ctx, ui);
+
+        ui.add_space(ui.available_height() - 75.0);
         Controls::with_frame(ctx, ui, frame);
+
+        // ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
+        //     Controls::with_frame(ctx, ui, frame);
+        // });
     }
 }
