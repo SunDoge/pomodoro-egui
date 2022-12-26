@@ -4,7 +4,7 @@ use std::time::Duration;
 use super::styled_slider::StyledSlider;
 
 // Second
-const DURATION_MIN: f64 = 10.0;
+const DURATION_MIN: f64 = 1.0;
 const DURATION_MAX: f64 = (60 * 60) as f64;
 
 fn format_time(val: f64) -> String {
@@ -28,6 +28,8 @@ impl<'a> Widget for PomodoroSlider<'a> {
         style.visuals.widgets.inactive.bg_fill = self.color;
         style.visuals.widgets.active.bg_fill = self.color;
         style.visuals.widgets.hovered.bg_fill = self.color;
+        
+    
 
         ui.horizontal(|ui| {
             ui.add_space(25.0);

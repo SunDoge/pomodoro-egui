@@ -14,6 +14,12 @@ pub enum UiPages {
     Settings,
 }
 
+impl Default for UiPages {
+    fn default() -> Self {
+        Self::Main
+    }
+}
+
 pub trait AppComponent {
     type Context;
 

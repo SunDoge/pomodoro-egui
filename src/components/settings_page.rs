@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 use eframe::egui::{Checkbox, Color32, InnerResponse, Response, Style, Ui};
 
 use super::AppComponent;
@@ -29,7 +31,7 @@ impl SettingsPage {
         response.unwrap()
     }
 
-    fn paddig<R>(ui: &mut Ui, add: impl FnOnce(&mut Ui) -> R) -> InnerResponse<R> {
+    fn padding<R>(ui: &mut Ui, add: impl FnOnce(&mut Ui) -> R) -> InnerResponse<R> {
         ui.horizontal(|ui| {
             ui.add_space(LEFT_PADDING);
             add(ui)
@@ -89,8 +91,18 @@ impl AppComponent for SettingsPage {
         //     ui.add_space(-10.0);
         //     ui.monospace("Testing");
         // });
+        ui.vertical_centered(|ui| {
+            if ui.button("Reset Defaults").clicked() {
+                ctx.config.pomodoro.focus = Duration::from_secs(60 * 25);
+                ctx.config.pomodoro.short = Duration::from_secs(60 * 5);
+                ctx.config.pomodoro.long = Duration::from_secs(60 * 15);
+                ctx.config.pomodoro.rounds = 4;
+            }
+        });
 
-        Self::paddig(ui, |ui| {
+        ui.add_space(VERTICAL_PADDING);
+
+        Self::padding(ui, |ui| {
             // ui.set_style(ctx.resources.checkbox().clone());
             let ch = Checkbox::new(&mut ctx.config.timer_notification, "Notify on timer end");
             ui.add(ch);

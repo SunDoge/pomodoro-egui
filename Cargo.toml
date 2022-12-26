@@ -26,6 +26,7 @@ toml = "0.5.10"
 tiny-skia = "0.8.2"
 usvg = "0.28.0"
 resvg = "0.28.0"
+serde_json = "1.0.91"
 # glutin = "0.30.3"
 
 

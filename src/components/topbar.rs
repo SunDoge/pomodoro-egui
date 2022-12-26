@@ -30,7 +30,7 @@ impl AppComponent for Topbar {
                 //     }
                 // }
 
-                if ui.button(RichText::new("Settings").size(20.0)).clicked() {
+                if ui.button(RichText::new("Settings")).clicked() {
                     ctx.page = if ctx.page == UiPages::Main {
                         UiPages::Settings
                     } else {

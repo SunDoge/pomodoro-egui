@@ -1,5 +1,5 @@
 pub const APP_NAME: &str = "Pomodoro";
-pub const APP_CONFIG_NAME: &str = "pomodoro.toml";
+pub const APP_CONFIG_NAME: &str = "pomodoro.json";
 
 pub mod icons {
     pub const ICON_SETTINGS: &[u8] = include_bytes!("../resources/settings.svg");

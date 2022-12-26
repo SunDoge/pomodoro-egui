@@ -12,13 +12,15 @@ impl Controls {
         use eframe::egui::{CursorIcon, Label, Sense};
 
         let text = format!("{}/{}", current, max);
-        ui.label(text);
+        ui.monospace(text);
         ui.add_space(3.0);
 
-        let reset = RichText::new("Reset").small();
-        let reset = Label::new(reset).sense(Sense::click());
-        let reset = ui.add(reset);
-        reset.on_hover_cursor(CursorIcon::PointingHand)
+        // let reset = RichText::new("Reset").small();
+        // let reset = Label::new(reset).sense(Sense::click());
+        // let reset = ui.add(reset);
+        // reset.on_hover_cursor(CursorIcon::PointingHand)
+
+        ui.button("Reset")
     }
 
     // pub fn draw_mute(ui: &mut Ui, muted: bool) -> Response {
@@ -49,7 +51,7 @@ impl AppComponent for Controls {
         ui.horizontal(|ui| {
             ui.add_space(15.0);
 
-            ui.vertical(|ui| {
+            ui.horizontal(|ui| {
                 let current = ctx.pomodoro.round();
                 let max = ctx.config.pomodoro.rounds;
 

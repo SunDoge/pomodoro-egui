@@ -45,7 +45,7 @@ impl AppConfig {
     }
 
     pub fn save(&self) -> anyhow::Result<()> {
-        let config = toml::to_string(&self)?;
+        let config = serde_json::to_string_pretty(&self)?;
         let location = Self::get_location(self.portable)?;
         std::fs::write(&location, &config)?;
         Ok(())

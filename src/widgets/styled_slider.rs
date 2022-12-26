@@ -55,7 +55,10 @@ impl<'a> Widget for StyledSlider<'a> {
                 ui.style_mut().spacing.slider_width = ui.available_width() - 70.0;
 
                 let range = self.min..=self.max;
-                let slider = Slider::new(self.value, range).show_value(false).integer();
+                let slider = Slider::new(self.value, range)
+                    .show_value(false)
+                    .integer()
+                    .step_by(60.0);
                 result = Some(ui.add(slider));
 
                 let text = match self.formatter {
@@ -66,7 +69,7 @@ impl<'a> Widget for StyledSlider<'a> {
                 ui.add_space(5.0);
 
                 ui.monospace(text);
-            })
+            });
         });
 
         result.unwrap()

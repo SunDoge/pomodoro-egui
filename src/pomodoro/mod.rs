@@ -4,7 +4,7 @@ use self::timer::Timer;
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
 
-#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy, Serialize, Deserialize)]
 pub enum Status {
     Short,
     Long,
@@ -38,6 +38,7 @@ impl PomodoroConfig {
         }
     }
 }
+
 
 pub struct Pomodoro {
     timer: Timer,

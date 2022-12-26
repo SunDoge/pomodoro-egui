@@ -18,11 +18,12 @@ impl AppComponent for MainPage {
 
         Timer::add(ctx, ui);
 
-        ui.add_space(ui.available_height() - 75.0);
-        Controls::with_frame(ctx, ui, frame);
+        // ui.add_space(ui.available_height() - 75.0);
+        // Controls::with_frame(ctx, ui, frame);
 
-        // ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
-        //     Controls::with_frame(ctx, ui, frame);
-        // });
+        ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
+            ui.add_space(15.0);
+            Controls::with_frame(ctx, ui, frame);
+        });
     }
 }

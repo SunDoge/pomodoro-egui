@@ -6,9 +6,8 @@ enum Status {
     Paused,
 }
 
+#[derive(Debug)]
 pub struct Timer {
-    // finish_at: DateTime<Utc>,
-    // paused_at: DateTime<Utc>,
     finish_at: Instant,
     paused_at: Instant,
     status: Status,

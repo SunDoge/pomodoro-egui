@@ -1,5 +1,6 @@
 use eframe::CreationContext;
 use egui::Stroke;
+use serde::{Deserialize, Serialize};
 
 use crate::{
     components::{
@@ -78,6 +79,7 @@ impl App {
                 self.fullscreen = true;
             }
         }
+        // println!("{:?}, {}", status, self.fullscreen);
         frame.set_fullscreen(self.fullscreen);
 
         self.circle.foreground = Some(Self::status_stroke(&self.config, status));
@@ -103,7 +105,7 @@ impl eframe::App for App {
         egui::CentralPanel::default().show(ctx, |ui| {
             // Titlebar::with_frame(self, ui, frame);
 
-            // ui.add_space(15.0);
+            ui.add_space(15.0);
 
             Topbar::add(self, ui);
 
@@ -114,5 +116,10 @@ impl eframe::App for App {
                 UiPages::Settings => SettingsPage::add(self, ui),
             }
         });
+    }
+
+    fn on_close_event(&mut self) -> bool {
+        self.config.save().expect("Fail to save config");
+        true
     }
 }
