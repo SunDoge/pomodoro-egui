@@ -15,6 +15,7 @@ fn main() {
 
     let config = AppConfig::load().unwrap_or_else(|e| {
         dbg!(e);
+        tracing::info!("Use default config");
         AppConfig::default()
     });
 

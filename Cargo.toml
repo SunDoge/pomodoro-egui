@@ -26,6 +26,7 @@ dirs = "4.0.0"
 # usvg = "0.28.0"
 # resvg = "0.28.0"
 serde_json = "1.0.91"
+tracing = "0.1.37"
 # glutin = "0.30.3"
 
 
