@@ -1,9 +1,6 @@
 use egui::RichText;
 
-use crate::{
-    widgets::{icon_toggle::IconToggle, pomodoro_timer::PomodoroTimer},
-    App,
-};
+use crate::{widgets::pomodoro_timer::PomodoroTimer, App};
 
 use super::AppComponent;
 

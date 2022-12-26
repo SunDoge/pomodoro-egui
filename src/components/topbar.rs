@@ -1,6 +1,6 @@
 use egui::{vec2, RichText};
 
-use crate::{widgets::icon_button::IconButton, App};
+use crate::App;
 
 use super::{AppComponent, UiPages};
 

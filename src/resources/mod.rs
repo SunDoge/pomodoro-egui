@@ -1,11 +1,11 @@
-pub mod icon;
-pub mod icon_loader;
+// pub mod icon;
+// pub mod icon_loader;
 pub mod runtime;
 pub mod theme;
 
 use crate::config::app_config::AppConfig;
 
-use self::{icon_loader::Icons, runtime::Runtime, theme::Theme};
+use self::{runtime::Runtime, theme::Theme};
 use egui::{Context, Style, Visuals};
 
 pub struct ResourceLoader {
@@ -45,7 +45,7 @@ impl ResourceLoader {
         Ok(())
     }
 
-    pub fn icons(&self) -> &Icons {
-        &self.runtime().icons
-    }
+    // pub fn icons(&self) -> &Icons {
+    //     &self.runtime().icons
+    // }
 }
