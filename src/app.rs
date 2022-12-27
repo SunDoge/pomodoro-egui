@@ -1,5 +1,8 @@
+use std::collections::VecDeque;
+
 use eframe::CreationContext;
 use egui::Stroke;
+use notify_rust::Notification;
 use serde::{Deserialize, Serialize};
 
 use crate::{
@@ -13,7 +16,10 @@ use crate::{
     widgets::progress_circle::CircleConfig,
 };
 
-// pub type GlWindow;
+pub enum WindowAction {
+    SetMinimized(bool),
+    SetFullscreen(bool),
+}
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 /// add new fields, give them default values when deserializing old state
@@ -24,6 +30,7 @@ pub struct App {
     pub circle: CircleConfig,
     pub page: UiPages,
     pub fullscreen: bool,
+    pub window_actions: VecDeque<WindowAction>,
 }
 
 // impl Default for App {
@@ -62,10 +69,11 @@ impl App {
             config,
             page: UiPages::Main,
             fullscreen: false,
+            window_actions: VecDeque::new(),
         }
     }
 
-    pub fn process_timer(&mut self, frame: &mut eframe::Frame) {
+    pub fn process_timer(&mut self) {
         let status = match self.pomodoro.try_next() {
             Some(v) => v,
             None => return,
@@ -73,21 +81,26 @@ impl App {
 
         match status {
             Status::Focus => {
-                self.fullscreen = false;
+                self.window_actions
+                    .push_back(WindowAction::SetFullscreen(false));
+                Notification::new()
+                    .summary("Pomodoro EGUI")
+                    .body("Start FOCUS")
+                    .show()
+                    .expect("fail to show notification");
             }
             Status::Short | Status::Long => {
-                self.fullscreen = true;
+                self.window_actions
+                    .push_back(WindowAction::SetMinimized(false));
+                self.window_actions
+                    .push_back(WindowAction::SetFullscreen(true));
+                Notification::new()
+                    .summary("Pomodoro EGUI")
+                    .body("Start BREAK")
+                    .show()
+                    .expect("fail to show notification");
             }
         }
-        // println!("{:?}, {}", status, self.fullscreen);
-        // frame.set_visible(true);
-        // frame.focus_window();
-        // frame.set_minimized(false);
-        frame.set_visible(true);
-        // frame.focus_window();
-        frame.set_always_on_top(self.fullscreen);
-        // frame.request_user_attention();
-        frame.set_fullscreen(self.fullscreen);
 
         self.circle.foreground = Some(Self::status_stroke(&self.config, status));
     }
@@ -107,7 +120,20 @@ impl eframe::App for App {
     /// Called each time the UI needs repainting, which may be many times per second.
     /// Put your widgets into a `SidePanel`, `TopPanel`, `CentralPanel`, `Window` or `Area`.
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
-        self.process_timer(frame);
+        self.process_timer();
+
+        match self.window_actions.pop_front() {
+            Some(window_action) => match window_action {
+                WindowAction::SetFullscreen(fullscreen) => {
+                    self.fullscreen = fullscreen;
+                    frame.set_fullscreen(fullscreen);
+                }
+                WindowAction::SetMinimized(minimized) => {
+                    frame.set_minimized(minimized);
+                }
+            },
+            None => {}
+        }
 
         egui::CentralPanel::default().show(ctx, |ui| {
             // Titlebar::with_frame(self, ui, frame);
