@@ -43,11 +43,16 @@ pub struct App {
 
 impl App {
     /// Called once before the first frame.
-    // pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
+    pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
+        let config: AppConfig = cc
+            .storage
+            .map(|storage| eframe::get_value(storage, eframe::APP_KEY).unwrap_or_default())
+            .unwrap_or_default();
 
-    // }
+        Self::from_config(config, cc)
+    }
 
-    pub fn from_config(config: AppConfig, cc: &CreationContext) -> Self {
+    pub fn from_config(config: AppConfig, cc: &CreationContext<'_>) -> Self {
         let mut resources = ResourceLoader::new(&config);
         let style = resources.visuals().widgets.noninteractive;
         let pomodoro = Pomodoro::new(config.pomodoro);
@@ -151,11 +156,16 @@ impl eframe::App for App {
         });
     }
 
-    fn on_close_event(&mut self) -> bool {
+    // fn on_close_event(&mut self) -> bool {
+    //     self.config.pomodoro = *self.pomodoro.config();
+    //     // dbg!(self.pomodoro.config());
+    //     self.config.save().expect("Fail to save config");
+    //     true
+    // }
+
+    fn save(&mut self, storage: &mut dyn eframe::Storage) {
         self.config.pomodoro = *self.pomodoro.config();
-        // dbg!(self.pomodoro.config());
-        self.config.save().expect("Fail to save config");
-        true
+        eframe::set_value(storage, eframe::APP_KEY, &self.config);
     }
 
     fn warm_up_enabled(&self) -> bool {

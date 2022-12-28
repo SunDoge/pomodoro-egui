@@ -13,11 +13,11 @@ fn main() {
 
     tracing_subscriber::fmt::init();
 
-    let config = AppConfig::load().unwrap_or_else(|e| {
-        dbg!(e);
-        tracing::info!("Use default config");
-        AppConfig::default()
-    });
+    // let config = AppConfig::load().unwrap_or_else(|e| {
+    //     dbg!(e);
+    //     tracing::info!("Use default config");
+    //     AppConfig::default()
+    // });
 
     let window_size = Some(vec2(360.0, 520.0));
 
@@ -26,14 +26,15 @@ fn main() {
         // resizable: false,
         initial_window_size: window_size,
         min_window_size: window_size,
-        always_on_top: config.always_on_top,
+        // always_on_top: config.always_on_top,
         ..Default::default()
     };
     eframe::run_native(
         defines::APP_NAME,
         native_options,
-        Box::new(|cc| Box::new(pomodoro_egui::App::from_config(config, cc))),
-    );
+        Box::new(|cc| Box::new(pomodoro_egui::App::new(cc))),
+    )
+    .unwrap();
 }
 
 // when compiling to web using trunk.
