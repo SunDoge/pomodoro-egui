@@ -3,7 +3,6 @@ use std::collections::VecDeque;
 use eframe::CreationContext;
 use egui::Stroke;
 use notify_rust::Notification;
-use serde::{Deserialize, Serialize};
 
 use crate::{
     components::{
