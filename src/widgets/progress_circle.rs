@@ -65,7 +65,7 @@ pub struct ProgressCircle<'a> {
 
 impl<'a> ProgressCircle<'a> {
     fn draw_main_text(&self, mut center: Pos2, painter: &Painter) {
-        let (color, style) = &self.config.text_main.clone().unwrap_or_else(|| {
+        let (color, _style) = &self.config.text_main.clone().unwrap_or_else(|| {
             let visuals = &painter.ctx().style().visuals.widgets.inactive;
             (visuals.fg_stroke.color, TextStyle::Heading)
         });
@@ -77,12 +77,12 @@ impl<'a> ProgressCircle<'a> {
             Align2::CENTER_CENTER,
             &self.text_main,
             FontId::monospace(48.0),
-            color.clone(),
+            *color,
         );
     }
 
     fn draw_additional_text(&self, mut center: Pos2, painter: &Painter) {
-        let (color, style) = self.config.text_main.clone().unwrap_or_else(|| {
+        let (color, _style) = self.config.text_main.clone().unwrap_or_else(|| {
             let visuals = &painter.ctx().style().visuals.widgets.inactive;
             (visuals.fg_stroke.color, TextStyle::Body)
         });
@@ -93,7 +93,7 @@ impl<'a> ProgressCircle<'a> {
             Align2::CENTER_CENTER,
             &self.text_additional,
             FontId::proportional(16.0),
-            color.clone(),
+            color,
         );
     }
 

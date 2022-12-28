@@ -1,4 +1,4 @@
-use eframe::egui::{Layout, Response, RichText, Ui};
+use eframe::egui::{Layout, Response, Ui};
 
 use super::AppComponent;
 // use crate::widgets::{IconButton, IconToggle};
@@ -9,7 +9,7 @@ pub struct Controls;
 
 impl Controls {
     pub fn draw_rounds(ui: &mut Ui, current: u16, max: u16) -> Response {
-        use eframe::egui::{CursorIcon, Label, Sense};
+        
 
         let text = format!("{}/{}", current, max);
         ui.monospace(text);
@@ -70,7 +70,7 @@ impl AppComponent for Controls {
                 ui.add_space(5.0);
 
                 if ui.button("Skip").clicked() {
-                    let status = ctx.pomodoro.next();
+                    let status = ctx.pomodoro.next_status();
                     ctx.circle.foreground = Some(App::status_stroke(&ctx.config, status));
                 }
             });

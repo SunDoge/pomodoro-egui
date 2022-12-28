@@ -9,7 +9,7 @@ pub struct Runtime {
 
 impl Runtime {
     pub fn new(ctx: &Context) -> anyhow::Result<Self> {
-        let mut style = ctx.style().clone();
+        let style = ctx.style();
         // let icons = Icons::preload(ctx)?;
         ctx.set_style(style);
         Ok(Self {})

@@ -87,7 +87,7 @@ impl Pomodoro {
         }
     }
 
-    pub fn next(&mut self) -> Status {
+    pub fn next_status(&mut self) -> Status {
         let status = match self.status {
             Status::Long => {
                 self.round = 1;
@@ -115,7 +115,7 @@ impl Pomodoro {
 
     pub fn try_next(&mut self) -> Option<Status> {
         if self.timer.time_left() == Duration::ZERO {
-            Some(self.next())
+            Some(self.next_status())
         } else {
             None
         }

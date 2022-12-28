@@ -1,4 +1,4 @@
-use egui::{vec2, RichText};
+use egui::{RichText};
 
 use crate::App;
 

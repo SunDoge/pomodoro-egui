@@ -33,13 +33,13 @@ impl ResourceLoader {
         self.theme.checkbox()
     }
 
-    fn runtime(&self) -> &Runtime {
-        self.runtime
-            .as_ref()
-            .expect("Resources runtime not allocated")
-    }
+    // fn runtime(&self) -> &Runtime {
+    //     self.runtime
+    //         .as_ref()
+    //         .expect("Resources runtime not allocated")
+    // }
 
-    pub fn load_runtime(&mut self, cfg: &AppConfig, ctx: &Context) -> anyhow::Result<()> {
+    pub fn load_runtime(&mut self, _cfg: &AppConfig, ctx: &Context) -> anyhow::Result<()> {
         let runtime = Runtime::new(ctx)?;
         self.runtime = Some(runtime);
         Ok(())

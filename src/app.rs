@@ -6,7 +6,7 @@ use notify_rust::Notification;
 
 use crate::{
     components::{
-        main_page::MainPage, settings_page::SettingsPage, titlebar::Titlebar, topbar::Topbar,
+        main_page::MainPage, settings_page::SettingsPage, topbar::Topbar,
         AppComponent, UiPages,
     },
     config::app_config::AppConfig,
