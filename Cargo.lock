@@ -1625,7 +1625,6 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "tracing-wasm",
- "winit",
 ]
 
 [[package]]
