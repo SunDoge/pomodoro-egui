@@ -84,13 +84,6 @@ impl AppComponent for SettingsPage {
         }
         ui.add_space(VERTICAL_PADDING);
 
-        // Self::paddig(ui, |ui| {
-        //     let mut style = ctx.resources.checkbox().clone();
-        //     style.spacing.icon_spacing = 0.0;
-        //     ui.set_style(style);
-        //     ui.add_space(-10.0);
-        //     ui.monospace("Testing");
-        // });
         ui.vertical_centered(|ui| {
             if ui.button("Reset Defaults").clicked() {
                 ctx.config.pomodoro.focus = Duration::from_secs(60 * 25);
