@@ -6,7 +6,6 @@ pub mod config;
 pub mod defines;
 pub mod pomodoro;
 pub mod resources;
-pub mod serde_helpers;
 pub mod widgets;
 
 pub use app::App;

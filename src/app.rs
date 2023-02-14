@@ -171,7 +171,7 @@ impl eframe::App for App {
         true
     }
 
-    fn clear_color(&self, _visuals: &egui::Visuals) -> egui::Rgba {
-        self.config.style.background.into()
+    fn clear_color(&self, _visuals: &egui::Visuals) -> [f32; 4] {
+        self.config.style.background.to_normalized_gamma_f32()
     }
 }
