@@ -22,7 +22,7 @@ serde = { version = "1", features = ["derive"] }
 color-hex = "0.2.0"
 anyhow = "1.0.75"
 tracing = "0.1.40"
-notify-rust = "4.9.0"
+notify-rust = "4.10.0"
 
 
 # native:
