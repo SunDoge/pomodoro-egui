@@ -9,7 +9,7 @@ rust-version = "1.65"
 
 
 [dependencies]
-egui = { version = "0.24.1", features = ["color-hex"] }
+egui = { version = "0.25.0", features = ["color-hex"] }
 eframe = { version = "0.24.1", default-features = false, features = [
     # "accesskit",     # Make egui comptaible with screen readers. NOTE: adds a lot of dependencies.
     "default_fonts", # Embed the default egui fonts.
